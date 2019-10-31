@@ -87,11 +87,35 @@ onevnet list
 oneimage list
 onetemplate list
 
+onehost create localhost -I kvm -v kvm -n dummy
+cd /var/lib/one
+ls -i
+nano mynetwork.one
+onevnet create mynetwork.one
+
+oneimage create – name “centos6-5.4.0qcoq2c” --path “/home/geetika-vm1/Downloads/” --driver
+qcow2 --datastore default
+
+
+onetemplate create --name “Centos-6.5” --cpu 1 --vcpu 1 --memory 512 --arch x86_64 –disk “centos-6-
+5.4.0.qcow2C” --nic “private” --vnc --ssh
+
 #update SSH key
 cat /var/lib/one/.ssh/id_rsa.pub
 
 #instantiate vm
 onevm list
+
+
+ssh-keysan 192.168.1.14 192.168.1.14 >> /var/lib/one/.ssh/known_hosts
+
+scp -rp /var/lib/one.ssh 192.168.1.15:/var/lib/one/
+
+sudo nano /etc.hosts
+
+and add 
+
+127.0.0.1 vm1
 
 -------------------------------------
 
